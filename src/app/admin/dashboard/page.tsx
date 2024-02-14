@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
 
@@ -13,7 +14,6 @@ import { IconTargetArrow, IconCircleCheckFilled } from '@tabler/icons-react'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Progress } from "@/components/ui/progress"
 import { SideBar } from '@/components/sidebar/sidebar'
-import { DataTable } from '@/components/custom/datatable/datatable'
 
 
 const Dashboard = () => {
@@ -22,6 +22,7 @@ const Dashboard = () => {
     <main className="flex flex-col bg-slate-200 w-screen h-screen">
       <div className="flex flex-row">
       
+
       <SideBar />
 
       <aside className="flex flex-column w-full md:w-5/6 h-screen lg:w-4/5 lx:w-4/5">
@@ -120,6 +121,9 @@ const Dashboard = () => {
             </Card>
           </div>
         </div>
+
+
+        
 
         </ScrollArea>
       </aside>

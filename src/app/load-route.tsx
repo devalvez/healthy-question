@@ -26,7 +26,7 @@ export default function LoadRoute () {
     setIsLoading(false)
   }, [signed])
 
-  if( !isLoading) {
+  if(!isLoading) {
     return <StartApp />
   }
 

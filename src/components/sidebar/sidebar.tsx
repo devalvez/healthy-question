@@ -56,40 +56,40 @@ export const SideBar = () => {
           <ul className="flex flex-col w-full justify-center mt-10 space-y-3">
             <li className="rounded-xl overflow-hidden">
               <Link
-                href="#"
-                className={pathname === '/' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500'}>
+                href="/"
+                className={pathname === '/' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500  hover:bg-gray-900'}>
                 <IconHome size={20} />
                 <span>Workbanch</span>
               </Link>
             </li>
             <li className="rounded-xl overflow-hidden">
               <Link
-                className={pathname === '/filter' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500'}
-                href="#">
+                className={pathname === '/admin/filter' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500 hover:bg-gray-900'}
+                href="/admin/filter">
                 <IconFilter size={20} />
                 <span>Filter</span>
               </Link>
             </li>
             <li className="rounded-xl overflow-hidden">
-              <Link className={pathname === '/menagement' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500'} href="#">
+              <Link className={pathname === '/admin/menagement' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500 hover:bg-gray-900'} href="#">
                 <IconUserEdit size={20} />
                 <span>Menagement</span>
               </Link>
             </li>
             <li className="rounded-xl overflow-hidden">
-              <Link className={pathname === '/unlock' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500'} href="#">
+              <Link className={pathname === '/admin/unlock' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500 hover:bg-gray-900'} href="#">
                 <IconLockOpen size={20} />
                 <span>Unlock</span>
               </Link>
             </li>
             <li className="rounded-xl overflow-hidden">
-              <Link className={pathname === '/map' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500'} href="#">
+              <Link className={pathname === '/admin/map' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500 hover:bg-gray-900'} href="#">
                 <IconMapPin size={20} />
                 <span>Map</span>
               </Link>
             </li>
             <li className="rounded-xl overflow-hidden">
-              <Link className={pathname === '/search' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500'} href="#">
+              <Link className={pathname === '/admin/search' ? 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-50 bg-gray-900' : 'flex flex-row py-3 px-[30%] items-center space-x-2 text-neutral-500 hover:bg-gray-900'} href="#">
                 <IconSearch size={20} />
                 <span>Search</span>
               </Link>

@@ -4,6 +4,20 @@ import key from '@/keys/secret.json'
 import { jwtVerify, JWTPayload, decodeJwt } from 'jose';
 import * as cookie from '@/services/cookies'
 
+type ProfileProps = {
+  birthday: string,
+  cpf: string
+  created_at: string,
+  email: string,
+  gender: string,
+  id: string,
+  name: string,
+  password: string,
+  phone: string,
+  role: string,
+  updated_at: string
+}
+
 type credentialsProps = {
   email: string,
   password: string,
@@ -12,6 +26,8 @@ type credentialsProps = {
 
 type AuthContextProps = {
   signed: boolean,
+  profile: ProfileProps | null | undefined,
+  logoutSession: () => void,
   resolveToken: (token: string) => any,
   handleUserSession: (credendials: credentialsProps) => any,
 }
@@ -23,24 +39,11 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-
   interface DecodedToken {
     payload: {
       exp: number,
       iat: number,
-      sub : {
-        birthday: string,
-        cpf: string
-        created_at: string,
-        email: string,
-        gender: string,
-        id: string,
-        name: string,
-        password: string,
-        phone: string,
-        role: string,
-        updated_at: string, 
-      },
+      sub : ProfileProps,
     },
     protectedHeader: {
       alg: string,
@@ -48,19 +51,7 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
     }
   }
 
-  type ProfileProps = {
-    birthday: string,
-    cpf: string
-    created_at: string,
-    email: string,
-    gender: string,
-    id: string,
-    name: string,
-    password: string,
-    phone: string,
-    role: string,
-    updated_at: string
-  }
+  
 
   const [signed, setSigned] = useState<boolean>(false)
   const [profile, setProfile] = useState<ProfileProps | null>()
@@ -73,7 +64,6 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
       const payload = await jwtVerify(token, enc)
       return payload;
     } catch (error) {
-      console.log(error)
       return null;
     }
   }
@@ -91,12 +81,11 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
     if(res.status === 200 && data.token) {
       if(credentials.remember) {
         const expireDate = new Date()
-        const cookieLife = expireDate.setMonth(expireDate.getDay() + 30);
+        const cookieLife = expireDate.setMonth(expireDate.getMonth() + 1);
         cookie.setCookie('user_session', data.token, { maxAge: cookieLife, secure: true, sameSite: true, httpOnly: true });
       } else {
-        cookie.setCookie('user_session', data.token, { secure: true, sameSite: true, httpOnly: true })
+        cookie.setCookie('user_session', data.token, { secure: true, sameSite: true, httpOnly: true, })
       }
-      setSigned(true)
       return res
     }
     else {
@@ -113,12 +102,18 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
 
   const checkSessionExists = async () => {
     const currentSession = await cookie.getCookie('user_session')
-    if(currentSession && currentSession.value !== null || currentSession?.value !== '') {
+    if(currentSession) {
       setStoragedToken(currentSession);
+      setSigned(true)
     } else {
       setStoragedToken(null)
       setSigned(false)
     }
+  }
+
+  const logoutSession = async () => {
+    cookie.deleteCookie('user_session');
+    setSigned(false)
   }
 
   useEffect(() => {
@@ -129,9 +124,10 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
     const handleProfile = async () => {
       const token = cookie.getCookie('user_session');
       
-      if(token) {
-        const decoded = await resolveToken(token) as unknown as DecodedToken | undefined
+      if(storagedToken) {
+        const decoded = await resolveToken(storagedToken) as unknown as DecodedToken | undefined
         setProfile(decoded?.payload?.sub);
+        
       } else {
         setProfile(null)
         setSigned(false)
@@ -145,6 +141,8 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
     <AuthContext.Provider
       value={{
         signed: signed,
+        profile: profile,
+        logoutSession: logoutSession,
         resolveToken: resolveToken,
         handleUserSession: handleUserSession,
       }}>

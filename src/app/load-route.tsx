@@ -4,8 +4,8 @@ import React, { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '@/contexts/auth.context'
 import { Preload } from '@/components/custom/preload/preload'
 
-import SignIn from './admin/auth/signin/page'
-import Dashboard from './admin/dashboard/page'
+import SignIn from './collaborators/auth/signin/page'
+import Dashboard from './collaborators/dashboard/page'
 
 export function StartApp() {
   const { signed } = useContext(AuthContext)

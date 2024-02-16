@@ -32,6 +32,7 @@ type AuthContextProps = {
   handleUserSession: (credendials: credentialsProps) => any,
 }
 
+
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
  const AuthProvider = ({
@@ -86,6 +87,7 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
       } else {
         cookie.setCookie('user_session', data.token, { secure: true, sameSite: true, httpOnly: true, })
       }
+      setSigned(true)
       return res
     }
     else {
@@ -129,6 +131,7 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
         setProfile(decoded?.payload?.sub);
         
       } else {
+        setStoragedToken(null)
         setProfile(null)
         setSigned(false)
       }

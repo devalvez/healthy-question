@@ -54,7 +54,7 @@ const formSchema = z.object({
   .boolean()
 })
 
-export const SignIn = () => {
+const SignIn = () => {
   const { handleUserSession } = useContext(AuthContext)
 
   const [isShow, setIsShow] = useState<boolean>(false)

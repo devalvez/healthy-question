@@ -1,10 +1,7 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '@/contexts/auth.context'
-
-import { Button } from '@/components/ui/button'
-import { IconTargetArrow, IconCircleCheckFilled } from '@tabler/icons-react'
+import { IconTargetArrow, IconCircleCheckFilled, IconDotsVertical, IconLockOpen } from '@tabler/icons-react'
 import { Progress } from "@/components/ui/progress"
-
+import { Button} from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -20,19 +17,36 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+
 import { Template } from "@/components/custom/template/template";
 import { VoiceSpectrum } from '@/components/custom/voice-spectrum/voice-spectrum'
+import { AuthContext } from '@/contexts/auth.context'
+import { greetings } from '@/app/utils/greetings'
 
 
 const Dashboard = () => {
 
-  const { profile } = useContext(AuthContext);
-  console.log(profile)
+  const { profile } = useContext(AuthContext)
 
   return (
     <Template>
-      <div className="grid grid-rows-2 md:grid-rows-2 lg:grid-rows-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 w-full h-fit">
-        <div className="grid grid-rows-4 sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-1 grid-flow-col gap-4 w-full h-fit">
+
+      <div className="flex flex-col mb-10">
+        <h2 className="text-3xl text-slate-800 font-bold">Olá, {profile?.name}</h2>
+        <p>É bom vê-lo aqui novamente, desejamos que tenha {greetings()}. Bons estudos!</p>
+      </div>
+
+      <div className="grid grid-rows-2 md:grid-rows-1 lg:grid-rows-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 w-full mb-10">
+        <div className="grid grid-rows-4 sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-1 grid-flow-col gap-4 w-full">
           <Card className="bg-neutral-50 text-slate-700 hover:bg-primary hover:border-slate-600 hover:text-neutral-50 hover:shadow-2xl">
             <CardHeader>
               <CardTitle>
@@ -140,7 +154,123 @@ const Dashboard = () => {
         </div>
       </div>
 
-        
+      
+      <div className="grid grid-cols-[40%_minmax(60%,_1fr)_60%]">
+        <div className="flex flex-col space-y-5">
+        <Card className="flex flex-row overflow-hidden">
+              <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-1/6 flex flex-col h-full justify-center items-center">
+                  <img className="w-full" src="https://static.vecteezy.com/system/resources/thumbnails/008/779/492/small/clienting-flat-style-illustration-design-free-vector.jpg" alt="demo.png" />
+                </div>
+                <div className="w-full md:w-5/6 flex flex-col h-full justify-center px-5 pb-10 md:p-2">
+                  <h4 className="text-lx1 font-bold">Lorem Ipsum</h4>
+                  <p>
+                    Purus viverra accumsan in nisl nisi, scelerisque eu ultrices vitae.
+                  </p>
+                </div>
+                <div className="w-full pb-5 md:w-[48px] flex flex-col h-full justify-center items-center">
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <IconDotsVertical size={24} className="text-neutral-500 hidden md:block" />
+                      <Button className="bg-blue-400 w-full md:hidden">
+                        Opções
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem>Detalhes</DropdownMenuItem>
+                      <DropdownMenuItem>Feedbacks</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+          </Card>
+
+          <Card className="flex flex-row overflow-hidden">
+              <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-1/6 flex flex-col h-full justify-center items-center">
+                  <img className="w-full" src="https://static.vecteezy.com/system/resources/thumbnails/008/779/492/small/clienting-flat-style-illustration-design-free-vector.jpg" alt="demo.png" />
+                </div>
+                <div className="w-full md:w-5/6 flex flex-col h-full justify-center px-5 pb-10 md:p-2">
+                  <h4 className="text-lx1 font-bold">Lorem Ipsum</h4>
+                  <p>
+                    Purus viverra accumsan in nisl nisi, scelerisque eu ultrices vitae.
+                  </p>
+                </div>
+                <div className="w-full pb-5 md:w-[48px] flex flex-col h-full justify-center items-center">
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <IconDotsVertical size={24} className="text-neutral-500 hidden md:block" />
+                      <Button className="bg-blue-400 w-full md:hidden">
+                        Opções
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem>Detalhes</DropdownMenuItem>
+                      <DropdownMenuItem>Feedbacks</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+          </Card>
+
+
+          <Card className="flex flex-row overflow-hidden">
+              <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-1/6 flex flex-col h-full justify-center items-center">
+                  <img className="w-full" src="https://static.vecteezy.com/system/resources/thumbnails/008/779/492/small/clienting-flat-style-illustration-design-free-vector.jpg" alt="demo.png" />
+                </div>
+                <div className="w-full md:w-5/6 flex flex-col h-full justify-center px-5 pb-10 md:p-2">
+                  <h4 className="text-lx1 font-bold">Lorem Ipsum</h4>
+                  <p>
+                    Purus viverra accumsan in nisl nisi, scelerisque eu ultrices vitae.
+                  </p>
+                </div>
+                <div className="w-full pb-5 md:w-[48px] flex flex-col h-full justify-center items-center">
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <IconDotsVertical size={24} className="text-neutral-500 hidden md:block" />
+                      <Button className="bg-blue-400 w-full md:hidden">
+                        Opções
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem>Detalhes</DropdownMenuItem>
+                      <DropdownMenuItem>Feedbacks</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+          </Card>
+        </div>
+
+        <div className="px-5">
+          <Card>
+            <CardContent>
+              <div className="flex flex-col-reverse md:flex-row">
+                <div className="p-5 w-full md:w-4/6 flex flex-col justify-center">
+                  <h2 className="text-2xl font-bold mb-5">Lorem Ipsum</h2>
+                  <p className="mb-10">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, corrupti voluptate quidem adipisci magni quo dolorum autem necessitatibus. Sint, animi voluptas. Veritatis accusantium sequi provident laboriosam maxime non recusandae assumenda.
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  </p>
+                  <Button className="bg-blue-400 space-x-3">
+                    <IconLockOpen size={20} />
+                    <span>Desbloquear</span>
+                  </Button>
+                </div>
+                <div className="p-3 w-full md:w-2/6 flex flex-col justify-center items-center">
+                  <img className="w-full" src="https://static.vecteezy.com/system/resources/thumbnails/004/812/320/small/people-with-disabilities-at-the-park-free-vector.jpg" alt="demo.jpg" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+      </div>
+
     </Template>
   )
 }

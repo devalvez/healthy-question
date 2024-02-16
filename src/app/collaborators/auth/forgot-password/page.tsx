@@ -41,7 +41,7 @@ const formSchema = z.object({
   }),
 })
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

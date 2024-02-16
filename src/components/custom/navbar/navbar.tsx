@@ -38,17 +38,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from '@/components/ui/input';
+import { ModeToggle } from '@/components/ui/toggle-mode';
 
 export const Navbar = () => {
 
-  const { logoutSession } = useContext(AuthContext)
+  const { logoutSession, profile } = useContext(AuthContext)
 
   return (
-    <div className="flex flex-row space-x-10">
-
+    <div className="flex z-10 w-full[+10] justify-end py-5 -ml-10">
+    <div className="flex flex-row space-x-10 px-10">
       <div className="relative mr-48">
         <IconSearch size={24} className="text-neutral-500 absolute top-2 left-2" />
-        <Input type="search" placeholder="Buscar..."  className="rounded-xl pl-10" />
+        <Input type="search" placeholder="Buscar..." className="rounded-xl pl-10" />
       </div>
 
       <NavigationMenu>
@@ -58,6 +59,7 @@ export const Navbar = () => {
               <NavigationMenuLink className={navigationMenuTriggerStyle()}><IconSettingsFilled size={24} className="text-neutral-500" /></NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
+
         </NavigationMenuList>
       </NavigationMenu>
 
@@ -66,10 +68,10 @@ export const Navbar = () => {
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+          </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="text-slate-600">
-          <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+          <DropdownMenuLabel>{profile?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="space-x-4">Perfil</DropdownMenuItem>
           <DropdownMenuItem className="space-x-4">Empresas</DropdownMenuItem>
@@ -81,7 +83,7 @@ export const Navbar = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
+      </div>
     </div>
   )
 }
